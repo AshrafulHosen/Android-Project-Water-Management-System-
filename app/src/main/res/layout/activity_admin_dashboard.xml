@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#d9534f"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Dashboard"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true" />
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#e6e6e6">
+        <TextView
+            android:id="@+id/tvCurrentSupply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Current Supply Level: 5000L"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/etNewSupply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Update Supply (Liters)"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginTop="5dp"/>
+        <Button
+            android:id="@+id/btnUpdateSupply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Supply"
+            android:backgroundTint="#5bc0de" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAdminRequests"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp" />
+</LinearLayout>

@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="30dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Management System"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btnUserLogin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="User Login"
+        android:backgroundTint="#007bff"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btnAdminLogin"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Admin Login"
+        android:backgroundTint="#d9534f"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:backgroundTint="#28a745"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp" />
+</LinearLayout>
