@@ -89,7 +89,7 @@
             android:id="@+id/btnBackToMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="< Back to Selection"
+            android:text="&lt; Back to Selection"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="#007bff"
             android:textAllCaps="false"

@@ -90,7 +90,7 @@
             android:id="@+id/btnBackToMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="< Back to Login"
+            android:text="&lt; Back to Login"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="#007bff"
             android:textAllCaps="false"
