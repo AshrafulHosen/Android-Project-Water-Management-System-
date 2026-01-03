@@ -43,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter username"
+                android:textColor="@color/black"
                 android:inputType="textPersonName"
                 android:padding="12dp"
                 android:background="@android:drawable/edit_text"
@@ -60,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter password"
+                android:textColor="@color/black"
                 android:inputType="textPassword"
                 android:padding="12dp"
                 android:background="@android:drawable/edit_text" />
