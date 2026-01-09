@@ -1,69 +1,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#337ab7"
-        android:padding="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="User Dashboard"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true" />
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+    android:orientation="vertical"
+    android:background="#1e1e1e"> <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#1f3a5f"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"> <TextView
+    android:id="@+id/dashboardTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="User Dashboard"
+    android:textColor="#e0e0e0"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_centerVertical="true" /> <TextView
+    android:id="@+id/welcomeLabel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Welcome, User!"
+    android:textColor="#b0b0b0"
+    android:layout_marginStart="30dp"
+    android:layout_toEndOf="@id/dashboardTitle"
+    android:layout_centerVertical="true" /> <Button
+    android:id="@+id/logoutButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Logout"
+    android:textAllCaps="false"
+    android:textColor="#FFFFFF"
+    android:backgroundTint="#dc3545"
+    android:textStyle="bold"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true" /> </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#e6e6e6">
-        <TextView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:text="Submit Water Request"
-            android:textStyle="bold"
-            android:textSize="16sp" />
-        <EditText
-            android:id="@+id/etVolume"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Volume (Liters): e.g., 500.0"
-            android:inputType="numberDecimal"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="5dp"/>
-        <Button
-            android:id="@+id/btnSubmit"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="#2a2a2a"> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit Water Request"
+            android:textColor="#e0e0e0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume (Liters):"
+            android:textColor="#e0e0e0" /> <EditText
+            android:id="@+id/volumeField"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g., 500.0"
+            android:textColor="#e0e0e0"
+            android:textColorHint="#888888"
+            android:inputType="numberDecimal"
+            android:backgroundTint="#3a3a3a"
+            android:layout_marginBottom="10dp"/> <Button
+            android:id="@+id/submitRequestButton"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="Submit Request"
-            android:backgroundTint="#5cb85c" />
+            android:textAllCaps="false"
+            android:backgroundTint="#198754"
+            android:textColor="#FFFFFF" /> <TextView
+            android:id="@+id/statusMessageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#b0b0b0"
+            android:layout_marginTop="5dp" /> </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:background="#1e1e1e"> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Request Status"
+            android:textColor="#e0e0e0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/> <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/requestTable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#2a2a2a" /> <Button
+            android:id="@+id/refreshRequestsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh Requests"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#0d6efd"
+            android:layout_marginTop="10dp" /> </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My Request Status"
-        android:textStyle="bold"
-        android:padding="16dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRequests"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 </LinearLayout>

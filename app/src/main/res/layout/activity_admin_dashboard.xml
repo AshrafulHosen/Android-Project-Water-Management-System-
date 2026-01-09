@@ -2,63 +2,172 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#1e1e1e">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#d9534f"
-        android:padding="10dp">
+        android:layout_height="50dp"
+        android:background="#1f3a5f"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
         <TextView
+            android:id="@+id/dashboardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin Dashboard"
-            android:textColor="#FFFFFF"
+            android:textColor="#e0e0e0"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/welcomeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, Admin!"
+            android:textColor="#b0b0b0"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/dashboardTitle"
+            android:layout_centerVertical="true" />
+
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_alignParentEnd="true" />
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#dc3545"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="#e6e6e6">
+        android:padding="15dp"
+        android:background="#2a2a2a">
+
         <TextView
-            android:id="@+id/tvCurrentSupply"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Current Supply Level: 5000L"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supply Management"
+            android:textColor="#e0e0e0"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:textSize="16sp"/>
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Supply Level:"
+            android:textColor="#e0e0e0" />
+
+        <TextView
+            android:id="@+id/supplyLevelLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0 L"
+            android:textColor="#4fc3f7"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Supply (Liters):"
+            android:textColor="#e0e0e0" />
+
         <EditText
-            android:id="@+id/etNewSupply"
+            android:id="@+id/newSupplyField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Update Supply (Liters)"
+            android:hint="Enter new total level"
+            android:textColor="#e0e0e0"
+            android:textColorHint="#888888"
             android:inputType="numberDecimal"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="5dp"/>
+            android:backgroundTint="#3a3a3a"
+            android:layout_marginBottom="10dp"/>
+
         <Button
             android:id="@+id/btnUpdateSupply"
-            android:layout_width="match_parent"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="Update Supply"
-            android:backgroundTint="#5bc0de" />
+            android:textAllCaps="false"
+            android:backgroundTint="#0dcaf0"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/supplyMessageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#b0b0b0"
+            android:layout_marginTop="5dp"/>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAdminRequests"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending Water Requests"
+            android:textColor="#e0e0e0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/requestTable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#2a2a2a" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/approveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approve"
+                android:enabled="false"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#198754"
+                android:layout_marginEnd="10dp"/>
+
+            <Button
+                android:id="@+id/rejectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reject"
+                android:enabled="false"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#dc3545"
+                android:layout_marginEnd="10dp"/>
+
+            <Button
+                android:id="@+id/refreshButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refresh"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#0d6efd" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
