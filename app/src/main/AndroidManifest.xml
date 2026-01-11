@@ -3,7 +3,9 @@
 
     <application
         android:allowBackup="true"
-        android:label="Water Management System"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="Water Management"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
         <activity android:name=".LoginActivity" android:exported="true">
@@ -13,12 +15,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity" />
         <activity android:name=".UserLoginActivity" />
         <activity android:name=".AdminLoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".UserDashboardActivity" />
         <activity android:name=".AdminDashboardActivity" />
+        <activity android:name=".BillingActivity" />
+        <activity android:name=".UserBillingActivity" />
+        <activity android:name=".AnalyticsActivity" />
 
 
     </application>

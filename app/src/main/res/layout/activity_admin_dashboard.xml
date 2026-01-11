@@ -1,173 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#1e1e1e">
+    android:background="#121212">
 
+    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#1f3a5f"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
+        android:layout_height="56dp"
+        android:background="#1a237e"
+        android:elevation="4dp"
+        android:paddingHorizontal="16dp">
 
-        <TextView
-            android:id="@+id/dashboardTitle"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin Dashboard"
-            android:textColor="#e0e0e0"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/welcomeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Welcome, Admin!"
-            android:textColor="#b0b0b0"
-            android:layout_marginStart="30dp"
-            android:layout_toEndOf="@id/dashboardTitle"
-            android:layout_centerVertical="true" />
+            <TextView
+                android:id="@+id/dashboardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Dashboard"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/welcomeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome, Admin!"
+                android:textColor="#B0BEC5"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="#c62828"
+            android:paddingHorizontal="16dp"
             android:text="Logout"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#dc3545"
-            android:textStyle="bold"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp"
-        android:background="#2a2a2a">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Supply Management"
-            android:textColor="#e0e0e0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current Supply Level:"
-            android:textColor="#e0e0e0" />
-
-        <TextView
-            android:id="@+id/supplyLevelLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.0 L"
-            android:textColor="#4fc3f7"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update Supply (Liters):"
-            android:textColor="#e0e0e0" />
-
-        <EditText
-            android:id="@+id/newSupplyField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter new total level"
-            android:textColor="#e0e0e0"
-            android:textColorHint="#888888"
-            android:inputType="numberDecimal"
-            android:backgroundTint="#3a3a3a"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:id="@+id/btnUpdateSupply"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:text="Update Supply"
-            android:textAllCaps="false"
-            android:backgroundTint="#0dcaf0"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/supplyMessageLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#b0b0b0"
-            android:layout_marginTop="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pending Water Requests"
-            android:textColor="#e0e0e0"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/requestTable"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#2a2a2a" />
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/approveButton"
-                android:layout_width="wrap_content"
+            <!-- Supply Management Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Approve"
-                android:enabled="false"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#198754"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
 
-            <Button
-                android:id="@+id/rejectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reject"
-                android:enabled="false"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#dc3545"
-                android:layout_marginEnd="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <Button
-                android:id="@+id/refreshButton"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💧 Supply Management"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Current Level"
+                                android:textColor="#9E9E9E"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/supplyLevelLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.0 L"
+                                android:textColor="#4FC3F7"
+                                android:textSize="28sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
+
+                            <EditText
+                                android:id="@+id/newSupplyField"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:background="@android:drawable/editbox_background"
+                                android:backgroundTint="#2C2C2C"
+                                android:hint="New supply level"
+                                android:inputType="numberDecimal"
+                                android:paddingHorizontal="12dp"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#757575"
+                                android:textSize="14sp" />
+
+                            <Button
+                                android:id="@+id/btnUpdateSupply"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:backgroundTint="#00897B"
+                                android:text="Update"
+                                android:textAllCaps="false"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/supplyMessageLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="#81C784"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Request Statistics Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Refresh"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#0d6efd" />
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📋 Request Statistics"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Pending -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/pendingCountLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#FFB74D"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pending"
+                                android:textColor="#9E9E9E"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#333333" />
+
+                        <!-- Approved -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/approvedCountLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#81C784"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Approved"
+                                android:textColor="#9E9E9E"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#333333" />
+
+                        <!-- Rejected -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:id="@+id/rejectedCountLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#E57373"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rejected"
+                                android:textColor="#9E9E9E"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Requests List Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📝 Water Requests"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/requestTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="#252525" />
+
+                    <!-- Action Buttons - Hidden by default, shown when request selected -->
+                    <LinearLayout
+                        android:id="@+id/actionButtonsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="12dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/approveButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#2E7D32"
+                            android:text="✓ Approve"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp" />
+
+                        <Button
+                            android:id="@+id/rejectButton"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#C62828"
+                            android:text="✗ Reject"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Quick Actions Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#1E1E1E"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚡ Quick Actions"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="8dp">
+
+                        <Button
+                            android:id="@+id/refreshButton"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#1565C0"
+                            android:text="↻ Refresh"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/billingButton"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#F9A825"
+                            android:text="💰 Billing"
+                            android:textAllCaps="false"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/analyticsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:backgroundTint="#6A1B9A"
+                        android:text="📊 Analytics Dashboard"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>
+

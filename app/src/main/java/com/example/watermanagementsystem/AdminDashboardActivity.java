@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -20,9 +21,11 @@ import java.util.List;
 public class AdminDashboardActivity extends AppCompatActivity {
 
     private TextView welcomeLabel, supplyLevelLabel, supplyMessageLabel;
+    private TextView pendingCountLabel, approvedCountLabel, rejectedCountLabel;
     private EditText newSupplyField;
     private RecyclerView requestTable;
-    private Button btnUpdateSupply, refreshButton, logoutButton, approveButton, rejectButton;
+    private Button btnUpdateSupply, refreshButton, logoutButton, approveButton, rejectButton, billingButton, analyticsButton;
+    private LinearLayout actionButtonsLayout;
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -87,10 +90,17 @@ public class AdminDashboardActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.btnLogout);
         approveButton = findViewById(R.id.approveButton);
         rejectButton = findViewById(R.id.rejectButton);
+        billingButton = findViewById(R.id.billingButton);
+        analyticsButton = findViewById(R.id.analyticsButton);
+        actionButtonsLayout = findViewById(R.id.actionButtonsLayout);
 
-        // Initially disable approve/reject buttons
-        approveButton.setEnabled(false);
-        rejectButton.setEnabled(false);
+        // Statistics count labels
+        pendingCountLabel = findViewById(R.id.pendingCountLabel);
+        approvedCountLabel = findViewById(R.id.approvedCountLabel);
+        rejectedCountLabel = findViewById(R.id.rejectedCountLabel);
+
+        // Initially hide approve/reject buttons
+        actionButtonsLayout.setVisibility(View.GONE);
     }
 
     private void setupListeners() {
@@ -120,6 +130,18 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please select a request first", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Billing button click
+        billingButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminDashboardActivity.this, BillingActivity.class);
+            startActivity(intent);
+        });
+
+        // Analytics button click
+        analyticsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminDashboardActivity.this, AnalyticsActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void onRequestSelected(WaterRequest request, int position) {
@@ -129,11 +151,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     private void updateButtonStates() {
         if (selectedRequest != null && "Pending".equalsIgnoreCase(selectedRequest.getStatus())) {
-            approveButton.setEnabled(true);
-            rejectButton.setEnabled(true);
+            // Show action buttons when a pending request is selected
+            actionButtonsLayout.setVisibility(View.VISIBLE);
         } else {
-            approveButton.setEnabled(false);
-            rejectButton.setEnabled(false);
+            // Hide action buttons when no request selected or request is not pending
+            actionButtonsLayout.setVisibility(View.GONE);
         }
     }
 
@@ -201,12 +223,35 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         allRequestsList.clear();
+                        int pendingCount = 0;
+                        int approvedCount = 0;
+                        int rejectedCount = 0;
+
                         for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
                             WaterRequest request = requestSnapshot.getValue(WaterRequest.class);
                             if (request != null) {
                                 allRequestsList.add(request);
+
+                                // Count by status
+                                String status = request.getStatus();
+                                if ("Pending".equals(status)) {
+                                    pendingCount++;
+                                } else if ("Approved".equals(status)) {
+                                    approvedCount++;
+                                } else if ("Rejected".equals(status)) {
+                                    rejectedCount++;
+                                }
                             }
                         }
+
+                        // Sort by timestamp - most recent first (descending order)
+                        allRequestsList.sort((r1, r2) -> Long.compare(r2.getTimestamp(), r1.getTimestamp()));
+
+                        // Update statistics labels
+                        pendingCountLabel.setText(String.valueOf(pendingCount));
+                        approvedCountLabel.setText(String.valueOf(approvedCount));
+                        rejectedCountLabel.setText(String.valueOf(rejectedCount));
+
                         adapter.notifyDataSetChanged();
 
                         if (allRequestsList.isEmpty()) {
@@ -228,6 +273,61 @@ public class AdminDashboardActivity extends AppCompatActivity {
             return;
         }
 
+        // If approving, first check and update supply level
+        if ("Approved".equals(newStatus)) {
+            adjustSupplyLevelAndApprove(request);
+        } else {
+            // For rejection, just update the status
+            performStatusUpdate(request, newStatus);
+        }
+    }
+
+    private void adjustSupplyLevelAndApprove(WaterRequest request) {
+        double requestedVolume = request.getVolume();
+
+        databaseReference.child("supply_level").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double currentSupply = 0.0;
+                if (snapshot.exists() && snapshot.getValue() != null) {
+                    currentSupply = snapshot.getValue(Double.class);
+                }
+
+                // Check if there's enough supply
+                if (currentSupply < requestedVolume) {
+                    Toast.makeText(AdminDashboardActivity.this,
+                            "Insufficient supply! Available: " + String.format("%.1f L", currentSupply) +
+                                    ", Requested: " + String.format("%.1f L", requestedVolume),
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                // Calculate new supply level
+                double newSupplyLevel = currentSupply - requestedVolume;
+
+                // Update supply level first, then update request status
+                databaseReference.child("supply_level").setValue(newSupplyLevel)
+                        .addOnSuccessListener(aVoid -> {
+                            // Now update the request status
+                            performStatusUpdate(request, "Approved");
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(AdminDashboardActivity.this,
+                                    "Failed to update supply level: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(AdminDashboardActivity.this,
+                        "Error reading supply level: " + error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void performStatusUpdate(WaterRequest request, String newStatus) {
         databaseReference.child("water_requests").child(request.getRequestId())
                 .child("status").setValue(newStatus)
                 .addOnSuccessListener(aVoid -> {

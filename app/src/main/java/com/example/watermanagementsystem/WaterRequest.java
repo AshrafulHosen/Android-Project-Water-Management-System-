@@ -24,6 +24,12 @@ public class WaterRequest {
     @PropertyName("timestamp")
     private long timestamp;
 
+    @PropertyName("billed")
+    private boolean billed;
+
+    @PropertyName("billId")
+    private String billId;
+
     // Default constructor required for Firebase
     public WaterRequest() {
     }
@@ -35,6 +41,8 @@ public class WaterRequest {
         this.volume = volume;
         this.status = status;
         this.timestamp = timestamp;
+        this.billed = false;
+        this.billId = null;
     }
 
     // Getters and Setters
@@ -84,6 +92,26 @@ public class WaterRequest {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @PropertyName("billed")
+    public boolean isBilled() {
+        return billed;
+    }
+
+    @PropertyName("billed")
+    public void setBilled(boolean billed) {
+        this.billed = billed;
+    }
+
+    @PropertyName("billId")
+    public String getBillId() {
+        return billId;
+    }
+
+    @PropertyName("billId")
+    public void setBillId(String billId) {
+        this.billId = billId;
     }
 }
 

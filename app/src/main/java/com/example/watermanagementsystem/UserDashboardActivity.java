@@ -24,7 +24,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     private TextView welcomeLabel, statusMessageLabel;
     private EditText volumeField;
     private RecyclerView requestTable;
-    private Button submitRequestButton, refreshRequestsButton, logoutButton;
+    private Button submitRequestButton, refreshRequestsButton, logoutButton, myBillsButton;
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
@@ -55,8 +55,17 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         // Get from intent if available
         String intentFullName = getIntent().getStringExtra("fullName");
+        String intentUsername = getIntent().getStringExtra("username");
         if (intentFullName != null && !intentFullName.isEmpty()) {
             currentFullName = intentFullName;
+        }
+        if (intentUsername != null && !intentUsername.isEmpty()) {
+            currentUsername = intentUsername;
+        }
+
+        // Debug: Check if username is available
+        if (currentUsername.isEmpty()) {
+            Toast.makeText(this, "Error: Username not found. Please login again.", Toast.LENGTH_LONG).show();
         }
 
         // Initialize views
@@ -86,12 +95,17 @@ public class UserDashboardActivity extends AppCompatActivity {
         submitRequestButton = findViewById(R.id.submitRequestButton);
         refreshRequestsButton = findViewById(R.id.refreshRequestsButton);
         logoutButton = findViewById(R.id.logoutButton);
+        myBillsButton = findViewById(R.id.myBillsButton);
     }
 
     private void setupListeners() {
         submitRequestButton.setOnClickListener(v -> submitWaterRequest());
         refreshRequestsButton.setOnClickListener(v -> loadUserRequests());
         logoutButton.setOnClickListener(v -> logout());
+        myBillsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(UserDashboardActivity.this, UserBillingActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void submitWaterRequest() {
@@ -133,6 +147,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         request.put("volume", volume);
         request.put("status", "Pending");
         request.put("timestamp", ServerValue.TIMESTAMP);
+        request.put("billed", false);  // New requests are not billed yet
 
         databaseReference.child("water_requests").child(requestId).setValue(request)
                 .addOnSuccessListener(aVoid -> {
@@ -148,19 +163,29 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     private void loadUserRequests() {
+        if (currentUsername.isEmpty()) {
+            statusMessageLabel.setText("Error: No username. Please login again.");
+            statusMessageLabel.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        // Load all requests and filter in code to avoid Firebase index requirement
         databaseReference.child("water_requests")
-                .orderByChild("username")
-                .equalTo(currentUsername)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         requestList.clear();
                         for (DataSnapshot requestSnapshot : snapshot.getChildren()) {
                             WaterRequest request = requestSnapshot.getValue(WaterRequest.class);
-                            if (request != null) {
+                            // Filter requests for current user
+                            if (request != null && currentUsername.equals(request.getUsername())) {
                                 requestList.add(request);
                             }
                         }
+
+                        // Sort by timestamp - most recent first (descending order)
+                        requestList.sort((r1, r2) -> Long.compare(r2.getTimestamp(), r1.getTimestamp()));
+
                         adapter.notifyDataSetChanged();
 
                         if (requestList.isEmpty()) {

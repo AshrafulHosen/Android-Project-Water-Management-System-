@@ -1,43 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#FFFFFF"
-    android:padding="30dp">
+    android:background="#121212"
+    android:padding="32dp">
+
+    <!-- App Logo -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="60dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="12dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_water_logo"
+            android:scaleType="fitCenter"
+            android:contentDescription="Water Management Logo" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Water Management"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Water Management System"
-        android:textSize="24sp"
+        android:text="System"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#000000" />
+        android:textColor="#4FC3F7"
+        android:layout_marginBottom="8dp" />
 
-    <Button
-        android:id="@+id/btnUserLogin"
-        android:layout_width="200dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Login"
-        android:backgroundTint="#007bff"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp" />
+        android:text="Manage your water resources efficiently"
+        android:textSize="14sp"
+        android:textColor="#9E9E9E"
+        android:layout_marginBottom="40dp" />
 
-    <Button
-        android:id="@+id/btnAdminLogin"
-        android:layout_width="200dp"
+    <!-- Login Options Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin Login"
-        android:backgroundTint="#d9534f"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp" />
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="#1E1E1E"
+        app:cardElevation="4dp">
 
-    <Button
-        android:id="@+id/btnCreateAccount"
-        android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Started"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="20dp" />
+
+            <Button
+                android:id="@+id/btnUserLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="User Login"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#1565C0"
+                android:textColor="#FFFFFF"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="12dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnAdminLogin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Admin Login"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#6A1B9A"
+                android:textColor="#FFFFFF"
+                android:drawableStart="@drawable/ic_admin"
+                android:drawablePadding="12dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/btnCreateAccount"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="#2E7D32"
+                android:textColor="#FFFFFF"
+                android:drawableStart="@drawable/ic_register"
+                android:drawablePadding="12dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Footer -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:backgroundTint="#28a745"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="10dp" />
+        android:text="Version 1.0"
+        android:textSize="12sp"
+        android:textColor="#616161"
+        android:layout_marginTop="32dp" />
+
 </LinearLayout>
+

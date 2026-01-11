@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M54,54m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0"/>
+
+    <!-- Inner Glow Circle -->
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M54,54m-42,0a42,42 0,1 1,84 0a42,42 0,1 1,-84 0"/>
+
+    <!-- Water Drop Shape -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,20
+                         C54,20 32,45 32,62
+                         C32,74 42,84 54,84
+                         C66,84 76,74 76,62
+                         C76,45 54,20 54,20Z"/>
+
+    <!-- Water Drop Highlight -->
+    <path
+        android:fillColor="#B3E5FC"
+        android:pathData="M44,55
+                         C44,55 42,62 46,68
+                         C48,71 44,65 44,55Z"/>
+
+    <!-- Small Droplet 1 -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M38,38
+                         C38,38 34,44 34,48
+                         C34,51 36,53 38,53
+                         C40,53 42,51 42,48
+                         C42,44 38,38 38,38Z"/>
+
+    <!-- Small Droplet 2 -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M70,42
+                         C70,42 67,46 67,49
+                         C67,51 68,52 70,52
+                         C72,52 73,51 73,49
+                         C73,46 70,42 70,42Z"/>
+</vector>
+

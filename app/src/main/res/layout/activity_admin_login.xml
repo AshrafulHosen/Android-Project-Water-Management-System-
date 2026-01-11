@@ -1,97 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#FFFFFF"
-    android:padding="30dp">
+    android:background="#121212"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Water Management System"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:gravity="center" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin Login"
-        android:textSize="18sp"
-        android:layout_marginTop="10dp"
-        android:textColor="#333333" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:padding="10dp">
+        android:gravity="center"
+        android:padding="32dp">
+
+        <!-- Icon -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="40dp"
+            app:cardBackgroundColor="#6A1B9A"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="🔐"
+                android:textSize="36sp" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin Login"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Admin Username"
-            android:textColor="#000000"
-            android:layout_marginBottom="5dp"/>
+            android:text="Administrator access only"
+            android:textSize="14sp"
+            android:textColor="#EF5350"
+            android:layout_marginBottom="32dp" />
 
-        <EditText
-            android:id="@+id/adminUsernameField"
+        <!-- Login Form Card -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter admin username"
-            android:textColor="@color/black"
-            android:inputType="textPersonName"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginBottom="15dp"/>
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#1E1E1E"
+            app:cardElevation="4dp">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Admin Username"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/adminUsernameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Enter admin username"
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#616161"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Admin Password"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/adminPasswordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:backgroundTint="#2C2C2C"
+                    android:hint="Enter admin password"
+                    android:inputType="textPassword"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#616161"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/adminMessageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#EF5350"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/handleAdminLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="Admin Sign In"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#6A1B9A"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/btnBackToMain"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Admin Password"
-            android:textColor="#000000"
-            android:layout_marginBottom="5dp" />
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="← Back to Home"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="#4FC3F7" />
 
-        <EditText
-            android:id="@+id/adminPasswordField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter admin password"
-            android:textColor="@color/black"
-            android:inputType="textPassword"
-            android:padding="12dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <TextView
-            android:id="@+id/adminMessageLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FF0000"
-            android:layout_marginTop="5dp" />
     </LinearLayout>
+</ScrollView>
 
-    <Button
-        android:id="@+id/handleAdminLogin"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:backgroundTint="#d9534f"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:layout_marginTop="20dp" />
-
-    <Button
-        android:id="@+id/btnBackToMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="&lt; Back to Selection"
-        style="?android:attr/borderlessButtonStyle"
-        android:textColor="#007bff"
-        android:textAllCaps="false"
-        android:layout_marginTop="10dp" />
-
-</LinearLayout>

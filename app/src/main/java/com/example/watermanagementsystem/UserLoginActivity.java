@@ -137,9 +137,11 @@ public class UserLoginActivity extends AppCompatActivity {
     }
 
     private void navigateToDashboard(String fullName) {
+        String username = sharedPreferences.getString("username", "");
         Toast.makeText(UserLoginActivity.this, "Welcome " + fullName, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(UserLoginActivity.this, UserDashboardActivity.class);
         intent.putExtra("fullName", fullName);
+        intent.putExtra("username", username);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
